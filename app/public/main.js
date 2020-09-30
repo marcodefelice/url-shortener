@@ -1,6 +1,5 @@
 window.onload = function(){
     const form = document.getElementById('url-form')
-    const result = document.getElementById('result-section')
 
     form.addEventListener('submit', event => {
         event.preventDefault();

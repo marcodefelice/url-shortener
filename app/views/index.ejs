@@ -1,62 +1,214 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<!doctype html>
+<html class="no-js" lang="en">
 
-		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-		<script src="../public/jquery.js" type="text/javascript"></script>
-		<title>URL</title>
-	</head>
-	<body>
-		<div class="container">
-			<h1>URL</h1>
-			<form action="" method="" id="url-form" class="my-4 form-inline">
-				<label for="userUrl" class="sr-only">URL</label>
-				<input
-					required
-					placeholder="URL"
-					type="url"
-					name="userUrl"
-					id="userUrl"
-					class="form-control col mr-2"
-				/>
-				<button class="btn btn-success" type="submit">yeaaaaaaaa</button>
-			</form>
-            <div id="result-section">
-				<div id="shortened-url">
-					<a href="" target="_blank" rel="nofollow" id="shortened-link"></a>
-				</div>
-			</div>
-		</div>
-	</body>
+<head>
+    <meta charset="utf-8">
+    
+    <!--====== Title ======-->
+    <title>URL-Shortener</title>
+    
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--====== Favicon Icon ======-->
+    <link rel="shortcut icon" href="../assets/images/favicon.png" type="image/png">
+ 
+    <!--====== Line Icons CSS ======-->
+    <link rel="stylesheet" href="../assets/css/LineIcons.css">
+    
+    <!--====== Bootstrap CSS ======-->
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    
+    <!--====== Default CSS ======-->
+    <link rel="stylesheet" href="../assets/css/default.css">
+    
+    <!--====== Style CSS ======-->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+</head>
+
+<body>
+    <!--[if IE]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+  <![endif]-->
+   
+   
+    <!--====== PRELOADER PART START ======-->
+
+    <div class="preloader">
+        <div class="loader">
+            <div class="ytp-spinner">
+                <div class="ytp-spinner-container">
+                    <div class="ytp-spinner-rotator">
+                        <div class="ytp-spinner-left">
+                            <div class="ytp-spinner-circle"></div>
+                        </div>
+                        <div class="ytp-spinner-right">
+                            <div class="ytp-spinner-circle"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--====== PRELOADER PART ENDS ======-->
+    
+    <!--====== HEADER PART START ======-->
+    
+    <header class="header-area">
+        <div class="navbar-area headroom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <nav class="navbar navbar-expand-lg">
+                            <a class="navbar-brand" href="#">
+                                <img src="../assets/images/logo.png" alt="Logo">
+                            </a>
+                        </nav> <!-- navbar -->
+                    </div>
+                </div> <!-- row -->
+            </div> <!-- container -->
+        </div> <!-- navbar area -->
+        
+        <div id="home" class="header-hero bg_cover d-lg-flex align-items-center" style="background-image: url(../assets/images/header-hero.jpg)">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="header-hero-content">
+                            <h1 class="hero-title text-center wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.2s"><b>Accorcia i</b> <span>link</span> <br><small>#ledimensioni<b>contano</b></small></h1>
+                            <p class="text-center wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.5s">URL-Shortener è stato creato con Nodejs. Concentrato sulle performance durante i redirect. <b>Gratuito</b> completamente e per sempre. </p>
+                            <div class="header-singup wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.8s">
+                                <form action="" method="" id="url-form" class="">
+                                    <label for="userUrl" class="sr-only">URL</label>
+                                    <input required type="url" name="userUrl" id="userUrl" class="form-control" placeholder="https://www.xyz.com/v=iDeMxlhm8XI&list=RDiDeMxlhm8XI"/>
+                                    <button class="main-btn" type="submit">Accorcia</button>
+                                </form>
+                            </div>
+                            <div class="text-center wow fadeInUp mt-20 " id="shortened-url" data-wow-duration="1s" data-wow-delay="0.3s">
+                                <a href="" target="_blank" rel="nofollow" id="shortened-link" class="h4 fadeInUp" data-wow-duration="1s" data-wow-delay="0.5s"></a>
+                            </div>
+                        </div> <!-- header hero content -->
+                    </div>
+                </div> <!-- row -->
+                <div class="row mt-5">
+                    <div class="col-sm-4">
+                        <div class="single-counter counter-color-1 mt-30 d-flex wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s">
+                            <div class="counter-shape">
+                                <span class="shape-1"></span>
+                                <span class="shape-2"></span>
+                            </div>
+                            <div class="counter-content media-body">
+                                <span class="counter-count"><span class="counter">100</span>%</span>
+                                <p class="text">Gratuito</p>
+                            </div>
+                        </div> <!-- single counter -->
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="single-counter counter-color-1 mt-30 d-flex wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s">
+                            <div class="counter-shape">
+                                <span class="shape-1"></span>
+                                <span class="shape-2"></span>
+                            </div>
+                            <div class="counter-content media-body">
+                                <span class="counter-count"><span class="counter">100</span>+</span>
+                                <p class="text">Link attivi</p>
+                            </div>
+                        </div> <!-- single counter -->
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="single-counter counter-color-2 mt-30 d-flex wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.6s">
+                            <div class="counter-shape">
+                                <span class="shape-1"></span>
+                                <span class="shape-2"></span>
+                            </div>
+                            <div class="counter-content media-body">
+                                <span class="counter-count"><span class="counter">99</span>%</span>
+                                <p class="text">Soddisfazione</p>
+                            </div>
+                        </div> <!-- single counter -->
+                    </div>
+                </div> <!-- row -->
+            </div> <!-- container -->
+        </div> <!-- header hero -->
+    </header>
+    
+    <!--====== HEADER PART ENDS ======-->
+    
+    <!--====== FOOTER PART START ======-->
+    
+    <footer id="footer" class="footer-area bg_cover" style="background-image: url(../assets/images/footer-bg.jpg)">
+        <div class="container">
+            <div class="footer-widget pt-5 pb-10">
+                <div class="row">
+                    <div class="col-lg-12 col-sm-12 order-sm-1 order-lg-1 text-center">
+                        <div class="footer-about">
+                            <p class="text">Faccio lo sviluppatore a tempo pieno. Stavo cercando di rimpicciolire alcune Url ma i servizi (affidabili) disponibili in rete sono a pagamento dopo una certa soglia.</p> 
+                            <p class="text">Allora ho deciso di sviluppare questo tool e di metterlo a disposizione della community o chi ne avesse bisogno.</p>
+                        </div> <!-- footer about -->
+                    </div>
+                    <div class="col-lg-12 col-sm-12 order-sm-2 order-lg-4 text-center">
+                        <div class="footer-contact pt-20">
+                            <p class="text">Se hai dei miglioramenti da suggerire vai sul <a href="#" rel="nofollow">progetto su Github</a></p>
+                            <div class="contact pt-10">
+                                <ul class="social mt-40">
+                                    <li><a href="#"><i class="lni-facebook"></i></a></li>
+                                    <li><a href="#"><i class="lni-github"></i></a></li>
+                                    <li><a href="#"><i class="lni-linkedin"></i></a></li>
+                                </ul>
+                            </div> <!-- contact -->
+                        </div> <!-- footer contact -->
+                    </div>
+                </div> <!-- row -->
+            </div> <!-- footer widget -->
+            <div class="footer-copyright text-center">
+                <p class="text">© 2020 Creato da <a href="#" rel="nofollow">Juni</a> Tutti i diritti riservati.</p>
+            </div>
+        </div> <!-- container -->
+    </footer>
+    
+    <!--====== FOOTER PART ENDS ======-->
+
+
+
+
+    <!--====== Jquery js ======-->
+    <script src="../assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="../assets/js/vendor/modernizr-3.7.1.min.js"></script>
+    
+    <!--====== Slick js ======-->
+    <script src="../assets/js/slick.min.js"></script>
+    
+    <!--====== Isotope js ======-->
+    <script src="../assets/js/imagesloaded.pkgd.min.js"></script>
+    <script src="../assets/js/isotope.pkgd.min.js"></script>
+    
+    <!--====== Counter Up js ======-->
+    <script src="../assets/js/waypoints.min.js"></script>
+    <script src="../assets/js/jquery.counterup.min.js"></script>
+    
+    <!--====== WOW js ======-->
+    <script src="../assets/js/wow.min.js"></script>
+    
+    <!--====== Headroom js ======-->
+    <script src="../assets/js/headroom.min.js"></script>
+    
+    <!--====== Jquery Nav js ======-->
+    <script src="../assets/js/jquery.nav.js"></script>
+    
+    <!--====== Scroll It js ======-->
+    <script src="../assets/js/scrollIt.min.js"></script>
+    
+    <!--====== Magnific Popup js ======-->
+    <script src="../assets/js/jquery.magnific-popup.min.js"></script>
+    
+    <!--====== Main js ======-->
+    <script src="../assets/js/main.js"></script>
+    
+</body>
+
 </html>
 
-<!-- <script type="text/javascript">
-		$('#url-form').on('submit', function(e) {
-			var value = $('#userUrl').val()
-			e.preventDefault();
-			//e.isPreventDefault(true)
-			$.ajax({
-				url: '/',
-				type: 'POST',
-				cache: false,
-				datatype: 'json',
-				contentType: 'application/json',
-				data: JSON.stringify({value: value}),
-				success: function(res){
-					$('#shortened-link').attr(res.shortenedUrl)
-					$('#shortened-link').text(res.shortenedUrl)
-					
-				}
-			})
-		});
-	
-</script> -->
 <script src="../public/main.js"></script>
 
 
