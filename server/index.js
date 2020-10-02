@@ -1,13 +1,12 @@
 require('dotenv').config()
 const express = require('express')
 const path = require('path')
-const db = require('./db/db')
 const routes = require('./routes/')
+const database = require('./db/database')
 
 const app = express()
 app.use(express.json())
 app.use(express.static(path.join(__dirname + '/../app/')))
-db.conn()
 //set template engine to ejs
 app.set('view engine', 'ejs')
 
@@ -26,11 +25,12 @@ app.get('/', (req, res) => {
 const baseUrl = process.env.LOCAL_BASE_URL
 app.post('/', async (req, res) => {
     //get user value and save in db and send response to client
-    routes.shortener.post(req, res, baseUrl)
+    routes.shortener.insert(req, res, baseUrl)
+
 })
 
 //redirect short url to long url route
-app.get('/:shortcode', (req, res) => {
+app.get('/:shortcode', (req, res, next) => {
     //get the requested short url and check if exits in database and redirect, if not send 404
     routes.redirecter.shortToLong(req, res)
 })

@@ -1,15 +1,19 @@
-const { update } = require('../models/urlModel')
-const UrlModel = require('../models/urlModel')
-
+const database = require('../db/database')
 
 exports.shortToLong = async (req, res) => {
-    const param = req.params.shortcode
-    const exists = await UrlModel.findById(param)
-    if(exists){
-        exists.clicks++ 
-        await exists.save()
-        return res.redirect(exists.fullUrl)
-    }else{
-        res.render('404')
-    }
+    let urlToRedirect = req.params.shortcode
+    let sql = 'SELECT * FROM urls where id = ?'
+    database.get(sql, [urlToRedirect], (err, row) => {
+        if(err){
+            return console.error(err.message)
+        }else{
+            let clicks = row.clicks++
+            database.run(`UPDATE urls set clicks = COALESCE(?,clicks) where id = ?`, [clicks, urlToRedirect], function(err, result) {
+                if(err){
+                    return console.error(err.message)
+                }
+            })
+            res.status(302).redirect(row.longurl)
+        }
+    })
 }

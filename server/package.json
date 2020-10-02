@@ -17,6 +17,7 @@
     "mongoose": "^5.10.7",
     "nodemon": "^2.0.4",
     "short-id": "0.1.0-1",
+    "sqlite3": "^5.0.0",
     "url-exists": "^1.0.3",
     "valid-url": "^1.0.9"
   }
